@@ -35,10 +35,7 @@
 ```text
 meta-engine
 ├── core            # 引擎核心：生命周期、状态、事件、上下文
-├── meta            # Meta 协议定义（Form / Table / Action 等）
 ├── schema          # Schema 定义与校验（可选）
-├── runtime         # 运行时解析与执行
-├── typings         # 类型定义
 ├── adapters        # UI / Framework 适配层
 │   ├── react
 │   ├── vue
@@ -168,12 +165,6 @@ docs
 * 可配置化运营后台
 
 ---
-
-## 🚫 不做什么
-
-* ❌ 不做具体 UI 组件库
-* ❌ 不绑定某个前端框架
-* ❌ 不追求炫技式 DSL
 
 `meta-engine` 专注于：**复杂组件的抽象、协议与运行时能力**。
 

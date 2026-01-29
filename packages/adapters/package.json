@@ -1,7 +1,7 @@
 {
-  "name": "@meta-engine/adapter-vue",
-  "version": "0.1.0",
-  "description": "Vue adapter for meta-engine",
+  "name": "@meta-engine/adapters",
+  "version": "1.0.0",
+  "description": "Core engine for meta-driven UI systems",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -17,12 +17,11 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "lint": "echo 'No lint configured'"
   },
-  "peerDependencies": {
-    "vue": ">=3.0.0"
-  },
   "devDependencies": {
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "vue": "^3.0.0"
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.5.0"
   }
 }

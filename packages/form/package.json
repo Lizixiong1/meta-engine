@@ -1,6 +1,6 @@
 {
   "name": "@meta-engine/form",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Form capability for meta-engine",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
