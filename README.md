@@ -38,13 +38,12 @@ meta-engine
 ├── meta            # Meta 协议定义（Form / Table / Action 等）
 ├── schema          # Schema 定义与校验（可选）
 ├── runtime         # 运行时解析与执行
+├── typings         # 类型定义
 ├── adapters        # UI / Framework 适配层
 │   ├── react
 │   ├── vue
-│   └── web
 ├── form            # 表单能力（基于 Meta）
-├── table           # 表格能力
-├── crud            # CRUD 编排能力
+├── table           # 表格能力  
 └── shared          # 通用工具与类型
 ```
 

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@meta-engine/*": ["packages/*/src"]
+    }
+  },
+  "include": [
+    "packages/**/*",
+    "docs/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
