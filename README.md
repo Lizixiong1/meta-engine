@@ -34,8 +34,6 @@
 
 ```text
 meta-engine
-├── core            # 引擎核心：生命周期、状态、事件、上下文
-├── schema          # Schema 定义与校验（可选）
 ├── adapters        # UI / Framework 适配层
 │   ├── react
 │   ├── vue

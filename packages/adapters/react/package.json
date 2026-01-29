@@ -1,7 +1,7 @@
 {
-  "name": "@meta-engine/core",
+  "name": "@meta-engine/adapter-react",
   "version": "1.0.0",
-  "description": "Core engine for meta-driven UI systems",
+  "description": "React adapter for meta-engine",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,15 +13,18 @@
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "build": "tsup src/index.tsx --format cjs,esm --dts",
+    "dev": "tsup src/index.tsx --format cjs,esm --dts --watch",
     "lint": "echo 'No lint configured'"
   },
   "devDependencies": {
-    "tsup": "^8.0.0",
+    "@types/node": "^25.0.3",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "typescript": "^5.0.0"
   },
   "peerDependencies": {
-    "typescript": ">=4.5.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
