@@ -38,4 +38,4 @@ package-lock.json
 
 /lib/generated/prisma
 
-docs/.vitepress/*
+docs/.vitepress/cache

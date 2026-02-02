@@ -7,7 +7,10 @@
     "build": "pnpm run -r build",
     "dev": "pnpm run -r dev",
     "lint": "pnpm run -r lint",
-    "test": "pnpm run -r test"
+    "test": "pnpm run -r test",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "workspaces": [
     "packages/*",
@@ -15,9 +18,11 @@
   ],
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0",
+    "pnpm": "^8.0.0",
     "tsup": "^8.0.0",
-    "pnpm": "^8.0.0"
+    "typescript": "^5.0.0",
+    "vitepress": "2.0.0-alpha.16",
+    "vue": "^3.5.27"
   },
   "engines": {
     "node": ">=16.0.0"
