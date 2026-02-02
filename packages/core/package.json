@@ -1,7 +1,7 @@
 {
-  "name": "@meta-engine/shared",
+  "name": "@meta-engine/core",
   "version": "1.0.0",
-  "description": "Shared utilities and types for meta-engine",
+  "description": "Table capability for meta-engine",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -23,8 +23,5 @@
   },
   "peerDependencies": {
     "typescript": ">=4.5.0"
-  },
-  "dependencies": {
-    "lodash-es": "^4.17.23"
   }
 }

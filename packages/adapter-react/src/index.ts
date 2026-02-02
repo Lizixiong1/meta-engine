@@ -3,7 +3,7 @@ import { createElement } from "react";
 const adapterOptions = {
   // 渲染函数
   render: () => {
-    // return createElement();
+    return createElement();
   },
 
   //   创建布局元素

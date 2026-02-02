@@ -71,7 +71,7 @@ export const antdAdapter = {
 同一份 Meta：
 
 * 在 React + AntD
-* 在 Vue + Arco
+* 在 Vue + elementUI
 * 在 Angular + 自研组件
 
 👉 **行为完全一致**。

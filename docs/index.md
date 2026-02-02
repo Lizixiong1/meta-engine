@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Meta Engine"
-  text: "是一个基于元数据（Meta）驱动的复杂组件管理引擎**，用于构建企业级中后台系统中的 表单、表格、CRUD、搜索、页面编排等能力"
+  text: "是一个基于元数据（Meta）驱动的复杂组件管理引擎，用于构建企业级中后台系统中的 表单、表格、CRUD、搜索、页面编排等能力"
   tagline: My great project tagline
   actions:
     - theme: brand
