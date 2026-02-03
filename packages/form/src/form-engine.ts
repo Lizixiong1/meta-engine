@@ -1,25 +1,15 @@
 import { Core } from "@meta-engine/core";
-import { Context, RenderOptions, Schema } from "./types";
-
-export const getComponentConfig = (
-  item: FieldItem,
-  customControls?: Record<string, ComponentsMap<any>>,
-) => {
-  const config = componentsMap.get(item.field.control.type)
-    ? componentsMap.get(item.field.control.type)
-    : customControls
-      ? (Reflect.get(customControls, item.field.control.type) as ComponentsMap)
-      : undefined;
-  if (config && !config.renderType) {
-    config.renderType = 1;
-  }
-  return config;
-};
+import { Context, Field, RenderOptions, Schema } from "./types";
+interface FieldItem extends Record<string, any> {
+  children?: FieldItem[];
+}
 class FormEngine<T> {
   core: Core;
   schema: Schema;
   context: Context;
   renderOptions: RenderOptions<T>;
+  // fieldItems: FieldItem[];
+  ref: any;
   constructor(
     renderOptions: RenderOptions<T>,
     schema: Schema,
@@ -29,6 +19,23 @@ class FormEngine<T> {
     this.renderOptions = renderOptions;
     this.schema = schema;
     this.context = initialContext || schema.context || {};
+  }
+
+  getRef() {
+    if (!this.ref) {
+      this.ref = {
+        instance: this,
+      };
+    }
+    return this.ref;
+  }
+  render() {
+    // return this.renderLayout(this.renderNode(fieldItems));
+
+    return (this.schema.fields || []).map((field) => {
+      const type = this.schema.components[field.type];
+      return this.renderOptions.render(type.component, { key: field.key });
+    });
   }
 
   renderLayoutItem(props?: Record<string, any>, children?: T) {
@@ -56,35 +63,6 @@ class FormEngine<T> {
     }
     return this.renderOptions.render(Layout, children);
   }
-
-  renderNode(fieldItems: FieldItem[]): T {
-    const components = this.schema.components;
-    const extraProps = {
-      context: this.context,
-    };
-    return fieldItems.map((item) => {
-      let Com = getComponentConfig(item, components);
-      if (!Com) {
-        console.warn("该type的组件 未注册 请注册该组件后使用");
-        return null;
-      }
-      return this.renderLayoutItem(
-        { ...item.field.layout, key: item.path.key },
-        this.renderOptions.render(
-          Com.component,
-          Object.assign({}, item.props, extraProps),
-          Com.renderType === 1
-            ? null
-            : item.children
-              ? this.renderNode(item.children)
-              : null,
-        ),
-      );
-    });
-  }
-  render() {
-    return this.renderLayout(this.renderNode(fieldItems));
-  }
 }
 
-export default FormEngine;
+export { FormEngine };

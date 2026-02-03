@@ -15,6 +15,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "resolveJsonModule": true,
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "@meta-engine/*": ["packages/*/src"]

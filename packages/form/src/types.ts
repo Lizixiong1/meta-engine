@@ -1,4 +1,8 @@
-export interface Field {}
+export interface Field {
+  type: string;
+  key: string;
+  children?: Field[];
+}
 
 export interface Context {}
 
@@ -34,4 +38,12 @@ export interface Schema {
 export interface RenderOptions<T = any> {
   render: (...args: any) => T;
   fragment: T;
+}
+export interface FormRenderProps extends Pick<
+  Schema,
+  "components" | "layoutComponents" | "fields"
+> {}
+
+export interface FormRef {
+  getRef: () => any;
 }

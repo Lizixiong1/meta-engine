@@ -1,18 +1,8 @@
-import { h } from "vue";
+import FormRender from "./FormRender";
+import { type FormRenderProps, type FormRef } from "@meta-engine/form";
 
-const adapterOptions = {
-  // 渲染函数
-  render: () => {
-    // return createElement();
-  },
 
-  //   创建布局元素
-  createLayoutElement: () => {
-    return;
-  },
 
-  //   创建布局子元素
-  createLayoutItemElement: () => {
-    return;
-  },
-};
+export { FormRender };
+
+export type { FormRenderProps, FormRef };
