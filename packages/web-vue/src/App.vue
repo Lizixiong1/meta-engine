@@ -9,12 +9,20 @@ import { h, onMounted, ref } from "vue";
 const formRef = ref<FormRef>();
 
 const FormRender = createFormRender({
-  layout: Form,
-  layoutItem: FormItem,
+  layout: h(Form, {
+    labelCol: {
+      span: 12,
+    },
+    wrapperCol: {
+      span: 12,
+    },
+  }),
+  layoutItem: h(FormItem),
+  components: {
+    input: h(Input),
+    text: h(Input.TextArea),
+  },
 });
-const components: FormRenderProps["components"] = {
-  input: Input,
-};
 
 const fields: FormRenderProps["fields"] = [
   {
@@ -24,25 +32,23 @@ const fields: FormRenderProps["fields"] = [
       label: "测试",
     },
   },
+  {
+    type: "text",
+    key: "b",
+    layout: {
+      label: "测试1",
+    },
+  },
 ];
 
-const config: FormRenderProps["config"] = {
-  layout: Form,
-  layoutItem: FormItem,
-};
+const config: FormRenderProps["config"] = {};
 onMounted(() => {
   console.log(formRef.value?.getRef());
 });
 </script>
 
 <template>
-  <FormRender
-    ref="formRef"
-    :components="components"
-    :fields="fields"
-    :config="config"
-  >
-  </FormRender>
+  <FormRender ref="formRef" :fields="fields" :config="config" />
 </template>
 
 <style scoped></style>

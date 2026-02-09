@@ -29,16 +29,15 @@ class FormEngine<T, K> {
     }
     return this.ref;
   }
-  render(extra?: T[]) {
+  render() {
     this.core.clear();
+    const Layout = this.schema.layout || this.renderOptions.fragment;
+    const props = { ...this.schema.layoutProps };
     const items = this.schema.fields
       ? this.renderLayoutItems(this.schema.fields)
       : [];
 
-    return this.renderOptions.render(this.renderOptions.fragment, {}, [
-      ...items,
-      extra,
-    ]);
+    return this.renderOptions.render(Layout, props, items);
   }
 
   renderLayoutItems(fields: Field[], path?: string[]): T[] {
@@ -47,31 +46,41 @@ class FormEngine<T, K> {
       const v_component =
         this.schema.components[type] || this.renderOptions.fragment;
       const p = path ? [...path, key] : [key];
+
+      const pathInstance = Core.getPath(p);
+      const model = this.core.setModel(pathInstance);
       const child = children?.length
         ? this.renderLayoutItems(children, p)
         : undefined;
 
-      const v_node = this.renderOptions.render(v_component, props, child);
+      const v_node = this.renderOptions.render(
+        v_component,
+        {
+          ...props,
+          value: model.value,
+          onChange: (e) => model.onChange(e?.target?.value || e),
+        },
+        child,
+      );
       let LayoutItem = this.schema.layoutItem || this.renderOptions.fragment;
 
-      return this.renderOptions.render(
+      const item = this.renderOptions.render(
         LayoutItem,
         {
           ...this.schema.layoutItemProps,
           ...layout,
-          key: p.join("."),
         },
         () => v_node,
       );
+
+      return this.renderOptions.render(
+        this.renderOptions.field,
+        {
+          key: pathInstance.key,
+        },
+        () => item,
+      );
     });
-  }
-
-  renderLayout(children?: T | T[]) {
-    let Layout = this.schema.layout || this.renderOptions.fragment;
-
-    const props = { ...this.schema.layoutProps };
-
-    return this.renderOptions.render(Layout, props, children);
   }
 }
 

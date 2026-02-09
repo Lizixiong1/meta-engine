@@ -1,3 +1,7 @@
+import { FORCE_UPDATE_KEY } from "./constant";
+import { FieldCtx } from "./core";
+import Path from "./path";
+
 export interface ValidationResult {
   isValid: boolean;
   errorMessage?: string;
@@ -26,11 +30,23 @@ class Model {
   value?: any;
   visible!: boolean;
   required!: boolean;
-  isMounted: boolean;
+  methods: Record<string, Function> = {};
   constructor(attrs: Partial<Attrs>, config?: ModalConfig) {
-    this.isMounted = false;
     this.initAttrs({ required: false, visible: true, ...attrs });
     this.config = { ...defaultConfig, ...config };
+  }
+
+  register(type: string, callback: Function) {
+    this.methods[type] = callback;
+  }
+
+  exec(type: string) {
+    const callback = this.methods[type];
+    callback && callback();
+  }
+
+  onChange(newValue: any) {
+    this.value = newValue;
   }
 
   initAttrs(attrs: Attrs) {

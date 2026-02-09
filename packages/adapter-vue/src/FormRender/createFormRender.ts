@@ -2,22 +2,16 @@ import { defineComponent, SlotsType } from "vue";
 
 import { Config, CreateConfig, FormEngine, Schema } from "@meta-engine/form";
 import { Fragment, h, type VNode, PropType, type Component } from "vue";
-
-interface ComponentSlots {
+import Field from "./Field";
+interface SlotsConfig {
   default?: any;
-  layout?: any;
-  layoutItem?: any;
 }
 export default function createFormRender(
-  createConfig?: CreateConfig<Component>,
+  createConfig: CreateConfig<Component>,
 ) {
-  const { layout, layoutItem } = { ...createConfig };
+  const { layout, layoutItem, components } = createConfig;
   return defineComponent({
     props: {
-      components: {
-        type: Object as PropType<Schema["components"]>,
-        required: true,
-      },
       fields: {
         type: Array as PropType<Schema["fields"]>,
         required: true,
@@ -26,14 +20,16 @@ export default function createFormRender(
         type: Object as PropType<Config>,
       },
     },
-    slots: Object as SlotsType<ComponentSlots>,
-    setup(props, { expose, slots }) {
-      const { components, fields, config } = props;
 
-      const f = new FormEngine<VNode, VNode>(
+    slots: Object as SlotsType<SlotsConfig>,
+    setup(props, { expose, slots }) {
+      const { fields, config } = props;
+
+      const f = new FormEngine<VNode, Component>(
         {
           fragment: h(Fragment),
           render: h,
+          field: Field,
         },
         {
           fields,
@@ -46,7 +42,11 @@ export default function createFormRender(
       expose({
         getRef: f.getRef.bind(f),
       });
-      return f.render.bind(f, slots.default?.());
+
+      const children = slots?.default
+        ? [f.render(), slots?.default()]
+        : [f.render()];
+      return () => h(Fragment, children);
     },
   });
 }

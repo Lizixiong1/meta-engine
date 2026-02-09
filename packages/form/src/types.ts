@@ -30,13 +30,11 @@ export interface Schema {
 export interface RenderOptions<T = any, K = any> {
   render: (...args: any) => T;
   fragment: K;
+  field: K
 }
 
 export interface Config extends Record<string, any> {}
-export interface FormRenderProps extends Pick<
-  Schema,
-  "components" | "fields" | "layout" | "layoutItem"
-> {
+export interface FormRenderProps extends Pick<Schema, "fields"> {
   config?: Config;
 }
 
@@ -47,4 +45,5 @@ export interface FormRef {
 export interface CreateConfig<T = any> {
   layout?: T;
   layoutItem?: T;
+  components: Record<string, T>;
 }

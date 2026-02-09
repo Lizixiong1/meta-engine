@@ -9,6 +9,9 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "lint": "echo 'No lint configured'"
   },
+  "dependencies": {
+     "@meta-engine/shared": "workspace:*"
+  },
   "devDependencies": {
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
