@@ -10,7 +10,7 @@ class Core {
   setModel(path: Path, model: Model) {
     return this.models.set(path, model);
   }
-  
+
   deleteModel(path: Path) {
     return this.models.delete(path);
   }
@@ -20,6 +20,10 @@ class Core {
 
   unRegisterPlugin(name: string) {
     this.plugins.uninstall(name);
+  }
+
+  clear() {
+    this.models = new WeakMap();
   }
 }
 

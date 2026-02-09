@@ -1,19 +1,32 @@
-import { createElement, useEffect, useRef } from "react";
+import { createElement,Fragment, useEffect, useRef } from "react";
 
 import {
-  FormRender,
+  createFormRender,
   type FormRef,
   type FormRenderProps,
 } from "@meta-engine/adapter-react";
+import { Form, Input } from "antd";
 
 const components: FormRenderProps["components"] = {
-  a: {
-    renderType: 2,
-    component: () => createElement("a", {}, 22432),
-  },
+  input: Input.TextArea,
 };
-const fields: FormRenderProps["fields"] = [{ type: "a", key: "a" }];
+const fields: FormRenderProps["fields"] = [
+  {
+    type: "input",
+    key: "a",
+    layout: {
+      label: "测试",
+    },
+    props: {
+      placeholder: '请输入'
+    }
+  },
+];
 
+const FormRender = createFormRender({
+  layout: Form,
+  layoutItem: Form.Item,
+});
 function App() {
   const formRef = useRef<FormRef>(null);
 

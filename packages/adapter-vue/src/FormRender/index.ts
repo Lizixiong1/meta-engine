@@ -1,3 +1,3 @@
-import FormRender from "./Form";
+import createFormRender from "./createFormRender";
 
-export default FormRender;
+export default createFormRender;

@@ -1,8 +1,6 @@
-import FormRender from "./FormRender";
+import createFormRender from "./FormRender";
 import { type FormRenderProps, type FormRef } from "@meta-engine/form";
 
-
-
-export { FormRender };
+export { createFormRender };
 
 export type { FormRenderProps, FormRef };

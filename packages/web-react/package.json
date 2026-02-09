@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@meta-engine/adapter-react": "workspace:*",
+    "antd": "^6.2.3",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@meta-engine/adapter-react": "workspace:*"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
