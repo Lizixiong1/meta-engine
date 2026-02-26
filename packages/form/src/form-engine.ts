@@ -1,4 +1,4 @@
-import { Core } from "@meta-engine/core";
+import { Core, FORCE_UPDATE_KEY } from "@meta-engine/core";
 import { Context, Field, RenderOptions, Schema } from "./types";
 interface FieldItem extends Record<string, any> {
   children?: FieldItem[];
@@ -53,33 +53,30 @@ class FormEngine<T, K> {
         ? this.renderLayoutItems(children, p)
         : undefined;
 
-      const v_node = this.renderOptions.render(
-        v_component,
-        {
-          ...props,
-          value: model.value,
-          onChange: (e) => model.onChange(e?.target?.value || e),
-        },
-        child,
-      );
       let LayoutItem = this.schema.layoutItem || this.renderOptions.fragment;
 
-      const item = this.renderOptions.render(
-        LayoutItem,
-        {
-          ...this.schema.layoutItemProps,
-          ...layout,
-        },
-        () => v_node,
-      );
-
-      return this.renderOptions.render(
-        this.renderOptions.field,
-        {
-          key: pathInstance.key,
-        },
-        () => item,
-      );
+      return this.renderOptions.render(this.renderOptions.field, {
+        key: pathInstance.key,
+        render: () =>
+          this.renderOptions.render(
+            LayoutItem,
+            {
+              ...this.schema.layoutItemProps,
+              ...layout,
+            },
+            () =>
+              this.renderOptions.render(
+                v_component,
+                {
+                  ...props,
+                  value: model.value,
+                  onChange: (e) => model.onChange(e?.target?.value || e),
+                },
+                child,
+              ),
+          ),
+        model,
+      });
     });
   }
 }

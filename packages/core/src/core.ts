@@ -69,7 +69,8 @@ class Core {
         const path = Path.getPath(pathName);
         const model = this.models.get(path);
         if (model) {
-          model.value = value;
+          // model.value = value;
+          model.set(value)
         }
       });
     }

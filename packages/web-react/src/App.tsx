@@ -54,6 +54,19 @@ function App() {
       >
         结果
       </button>
+      <button
+        onClick={() => {
+          const ref = formRef.current?.getRef();
+          if (ref) {
+            ref.instance.core.setValues({
+              a: "2",
+              b: "3",
+            });
+          }
+        }}
+      >
+        赋值
+      </button>
     </>
   );
 }

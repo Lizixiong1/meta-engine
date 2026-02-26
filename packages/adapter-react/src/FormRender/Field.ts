@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import useUpdate from "../hooks/useUpdate";
-import { ValidationResult } from "@meta-engine/core";
+import { FORCE_UPDATE_KEY, ValidationResult } from "@meta-engine/core";
 
 interface FieldProps {
   children?: ReactNode;
@@ -53,8 +53,15 @@ function useFieldBinding(props: FieldProps) {
 const Field: FC<FieldProps> = ({ children, ...props }) => {
   // const { validationResult, visible, ...otherProps } = useFieldBinding(props);
 
-  return createElement(Fragment, {}, children) ;
-  // return visible ? createElement(Fragment, {}, children) : null;
+  console.log(props);
+
+  const forceUpdate = useUpdate();
+
+  useEffect(() => {
+    props.model.register(FORCE_UPDATE_KEY, forceUpdate);
+  }, []);
+
+  return props.render();
 };
 
 export default Field;

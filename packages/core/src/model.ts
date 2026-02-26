@@ -72,6 +72,7 @@ class Model {
       }
     }
     this.value = newValue;
+    this.methods[FORCE_UPDATE_KEY]?.();
     return true;
   }
 }
