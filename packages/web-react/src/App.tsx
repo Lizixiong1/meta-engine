@@ -19,7 +19,7 @@ const fields: FormRenderProps["fields"] = [
     },
   },
   {
-    type: "input",
+    type: "text",
     key: "b",
     layout: {
       label: "测试",
@@ -31,10 +31,11 @@ const fields: FormRenderProps["fields"] = [
 ];
 
 const FormRender = createFormRender({
-  layout: Form,
+  // layout: Form,
   layoutItem: Form.Item,
   components: {
-    input: Input.TextArea,
+    input: Input,
+    text: Input.TextArea,
   },
 });
 function App() {

@@ -10,7 +10,8 @@
     "lint": "echo 'No lint configured'"
   },
   "dependencies": {
-    "@meta-engine/form": "workspace:*"
+    "@meta-engine/form": "workspace:*",
+    "@meta-engine/core": "workspace:*"
   },
   "peerDependencies": {
     "vue": ">=3.0.0"

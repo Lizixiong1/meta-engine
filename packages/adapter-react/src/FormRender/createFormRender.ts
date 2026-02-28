@@ -5,6 +5,7 @@ import {
   Fragment,
   ReactNode,
   useImperativeHandle,
+  useMemo,
   useState,
 } from "react";
 
@@ -51,6 +52,6 @@ export default function createFormRender(
       ),
     );
 
-    return form.render();
+    return useMemo(() => form.render(fields), [fields]);
   });
 }

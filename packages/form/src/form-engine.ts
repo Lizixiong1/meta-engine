@@ -1,8 +1,5 @@
 import { Core, FORCE_UPDATE_KEY } from "@meta-engine/core";
 import { Context, Field, RenderOptions, Schema } from "./types";
-interface FieldItem extends Record<string, any> {
-  children?: FieldItem[];
-}
 class FormEngine<T, K> {
   core: Core;
   schema: Schema;
@@ -29,15 +26,18 @@ class FormEngine<T, K> {
     }
     return this.ref;
   }
-  render() {
+  render(fields?: Field[]) {
+    fields = fields || this.schema.fields;
     this.core.clear();
     const Layout = this.schema.layout || this.renderOptions.fragment;
     const props = { ...this.schema.layoutProps };
-    const items = this.schema.fields
-      ? this.renderLayoutItems(this.schema.fields)
-      : [];
+    const items = fields ? this.renderLayoutItems(fields) : [];
 
-    return this.renderOptions.render(Layout, props, items);
+    return this.renderOptions.render(
+      Layout,
+      props,
+      this.schema.layout ? () => items : items,
+    );
   }
 
   renderLayoutItems(fields: Field[], path?: string[]): T[] {
@@ -58,26 +58,24 @@ class FormEngine<T, K> {
       return this.renderOptions.render(this.renderOptions.field, {
         key: pathInstance.key,
         render: () =>
-          this.renderOptions.render(
-            LayoutItem,
-            {
-              ...this.schema.layoutItemProps,
-              ...layout,
-            },
-            () =>
-              this.renderOptions.render(
-                v_component,
-                {
-                  ...props,
-                  value: model.value,
-                  onChange: (e) => model.onChange(e?.target?.value || e),
-                },
-                child,
-              ),
+          this.renderFormItem(LayoutItem, layout, () =>
+            this.renderOptions.render(
+              v_component,
+              {
+                ...props,
+                value: model.value,
+                onChange: (e: any) => model.onChange(e?.target?.value || e),
+              },
+              child,
+            ),
           ),
         model,
       });
     });
+  }
+
+  renderFormItem(com: any, props: Record<string, any>, children: () => T) {
+    return this.renderOptions.render(com, props, children);
   }
 }
 
